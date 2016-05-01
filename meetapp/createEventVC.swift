@@ -59,6 +59,11 @@ class createEventVC: UIViewController, CLLocationManagerDelegate  {
         locationManager.stopUpdatingLocation()
     }
     @IBAction func createEventClick(sender: UIButton) {
-        
+        var html = mapView.stringByEvaluatingJavaScriptFromString("document.body.innerHTML")
+
+        if let page = html {
+        //    UIWebView.stringByEvaluatingJavaScriptFromString("document.getElementById('myId').value")
+        }
+
     }
 }
