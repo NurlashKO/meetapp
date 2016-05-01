@@ -36,16 +36,10 @@ class MapVC : UIViewController, CLLocationManagerDelegate,
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
-            //locationManager.startUpdatingLocation()
             print("CONNECTED...\n")
-            //let localfilePath = NSBundle.mainBundle().URLForResource("test", withExtension: "html");
-            //let myRequest = NSURLRequest(URL: localfilePath!)
-            //mapView.loadRequest(myRequest)
-            //mapView.loadHTMLString(page, baseURL: nil)
         }
-
-        self.eventList.dataSource = self
         self.eventList.delegate = self
+        self.eventList.dataSource = self
     }
 
     func buildRequest(type: String) -> String {
@@ -76,7 +70,6 @@ class MapVC : UIViewController, CLLocationManagerDelegate,
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-            print("\(10) + Hello")
             let cell = eventList.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
             let row = indexPath.row
             cell.textLabel?.text = self.events[row].eventName
@@ -86,6 +79,7 @@ class MapVC : UIViewController, CLLocationManagerDelegate,
     }
 
     func getView(data: String) {
+        print(data)
         RestApiManager.sharedInstance.getViewData(data, onCompletion: onCompletionMap)
     }
 
@@ -97,8 +91,8 @@ class MapVC : UIViewController, CLLocationManagerDelegate,
     {
         let location = locations.last! as CLLocation
         userPosition = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        //getView(buildRequest("ShowEventMap"))
-        getView(buildRequest("ShowAllUsers"))
+        getView(buildRequest("ShowMyPosition"))
+        //getView(buildRequest("ShowAllUsers"))
         getEventList(buildRequest("ShowAllEvents"))
         locationManager.stopUpdatingLocation()
     }
