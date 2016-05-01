@@ -36,8 +36,8 @@ class createEventVC: UIViewController, CLLocationManagerDelegate  {
         }
     }
 
-    func buildRequest(type: String) -> String {
-        return "/\(type)?x=\(userPosition.latitude)&y=\(userPosition.longitude)&userId=\(0)"
+    func buildRequest() -> String {
+        return "?x=\(userPosition.latitude)&y=\(userPosition.longitude)&userId=\(0)"
     }
 
     func onCompletionCreate(json: JSON) -> Void {
@@ -47,15 +47,17 @@ class createEventVC: UIViewController, CLLocationManagerDelegate  {
     }
 
     func getView(data: String) {
-        print(data)
-        RestApiManager.sharedInstance.getViewData(data, onCompletion: onCompletionCreate)
+        let path = "http://aspnetwebapiintroductionpublish.azurewebsites.net/htmlrazor"+data
+        let url = NSURL (string: path);
+        let requestObj = NSURLRequest(URL: url!);
+        mapView.loadRequest(requestObj);
     }
 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations.last! as CLLocation
         userPosition = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        getView(buildRequest("ShowMapListener"))
+        getView(buildRequest())
         locationManager.stopUpdatingLocation()
     }
     @IBAction func createEventClick(sender: UIButton) {
