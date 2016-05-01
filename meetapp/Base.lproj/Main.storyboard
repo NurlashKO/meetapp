@@ -106,6 +106,72 @@
             </objects>
             <point key="canvasLocation" x="-482" y="2"/>
         </scene>
+        <!--Create EventVC-->
+        <scene sceneID="Byy-m4-ZkB">
+            <objects>
+                <viewController id="QCB-LV-koH" customClass="createEventVC" customModule="meetapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lja-jX-Vdv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qph-DE-1mC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i2G-ZJ-2ig">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASc-tb-gjV">
+                                <rect key="frame" x="216" y="533" width="169" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="Dtz-N1-Oum"/>
+                                    <constraint firstAttribute="height" constant="47" id="iFg-VR-1pq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Create Event"/>
+                                <connections>
+                                    <action selector="createEventClick:" destination="QCB-LV-koH" eventType="touchUpInside" id="9AJ-lY-1ej"/>
+                                    <segue destination="PQp-gA-gqk" kind="show" id="aKY-CJ-LAP"/>
+                                </connections>
+                            </button>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIr-ka-hLm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="525"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GIr-ka-hLm" firstAttribute="centerX" secondItem="ASc-tb-gjV" secondAttribute="centerX" id="BZN-gy-FSc"/>
+                            <constraint firstItem="GIr-ka-hLm" firstAttribute="leading" secondItem="i2G-ZJ-2ig" secondAttribute="leading" id="Dwa-oW-HH2"/>
+                            <constraint firstItem="ASc-tb-gjV" firstAttribute="top" secondItem="GIr-ka-hLm" secondAttribute="bottom" constant="8" symbolic="YES" id="Qdi-fF-t4S"/>
+                            <constraint firstAttribute="trailing" secondItem="GIr-ka-hLm" secondAttribute="trailing" id="Y4k-gE-rsh"/>
+                            <constraint firstAttribute="bottom" secondItem="ASc-tb-gjV" secondAttribute="bottom" constant="20" symbolic="YES" id="gMz-cv-yQh"/>
+                            <constraint firstItem="GIr-ka-hLm" firstAttribute="top" secondItem="i2G-ZJ-2ig" secondAttribute="top" id="wEu-To-LuK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="GIr-ka-hLm" id="bmK-46-Vbu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IN1-a2-jj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-312" y="721"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QaL-UC-oZ3">
+            <objects>
+                <viewController id="PQp-gA-gqk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qhm-1k-j59"/>
+                        <viewControllerLayoutGuide type="bottom" id="hnp-qe-GoJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2jy-aR-yMs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pIf-Ry-tjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-294" y="1493"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -126,6 +192,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Create Event"/>
+                                <connections>
+                                    <segue destination="QCB-LV-koH" kind="show" id="ONx-GO-hos"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6Q-2e-rkH">
                                 <rect key="frame" x="185" y="246" width="230" height="50"/>
@@ -190,7 +259,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LyH-Sv-679" id="eEn-4b-Ucg">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
