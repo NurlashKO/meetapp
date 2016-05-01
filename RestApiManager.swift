@@ -39,6 +39,13 @@ class RestApiManager: NSObject {
         })
     }
 
+    func createEvent(path:String, onCompletion: (JSON) -> Void) {
+        let route = baseURL+viewURL + path
+        makeHTTPGetRequest(route, onCompletion: { json, err in
+            onCompletion(json as JSON)
+        })
+    }
+
     // MARK: Perform a GET Request
     private func makeHTTPGetRequest(path: String, onCompletion: ServiceResponse) {
         let request = NSMutableURLRequest(URL: NSURL(string: path)!)

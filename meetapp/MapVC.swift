@@ -11,9 +11,12 @@ import MapKit
 import CoreLocation
 import SwiftyJSON
 
-class MapVC : UIViewController, CLLocationManagerDelegate {
+class MapVC : UIViewController, CLLocationManagerDelegate,
+        UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var mapView: UIWebView!
+
+    @IBOutlet weak var eventList: UITableView!
 
     var locationManager = CLLocationManager()
     var page: String = ""
@@ -41,6 +44,8 @@ class MapVC : UIViewController, CLLocationManagerDelegate {
             //mapView.loadHTMLString(page, baseURL: nil)
         }
 
+        self.eventList.dataSource = self
+        self.eventList.delegate = self
     }
 
     func buildRequest(type: String) -> String {
@@ -55,9 +60,29 @@ class MapVC : UIViewController, CLLocationManagerDelegate {
 
     func onCompletionEventList(json: JSON) -> Void {
         self.events = json.array!.map {EventObject(json: $0)};
-        for e in self.events {
-            print(e.eventName)
-        }
+        print(self.events.count)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            //reload your tableView
+            self.eventList.reloadData()
+        })
+    }
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.events.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+            print("\(10) + Hello")
+            let cell = eventList.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+            let row = indexPath.row
+            cell.textLabel?.text = self.events[row].eventName
+            cell.detailTextLabel?.text = self.events[row].description
+
+            return cell
     }
 
     func getView(data: String) {
@@ -72,7 +97,8 @@ class MapVC : UIViewController, CLLocationManagerDelegate {
     {
         let location = locations.last! as CLLocation
         userPosition = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        getView(buildRequest("ShowEventMap"))
+        //getView(buildRequest("ShowEventMap"))
+        getView(buildRequest("ShowAllUsers"))
         getEventList(buildRequest("ShowAllEvents"))
         locationManager.stopUpdatingLocation()
     }
